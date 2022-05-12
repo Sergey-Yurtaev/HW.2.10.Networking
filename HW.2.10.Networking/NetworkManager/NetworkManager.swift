@@ -12,7 +12,7 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     private init() {}
-    
+     
     func fetchData(from urlString: String, with complition: @escaping ([Planets]) -> Void) {
         guard let url = URL(string: urlString) else { return }
         
@@ -24,8 +24,8 @@ class NetworkManager {
             guard let data = data else { return }
             
             do {
-                let goPlanet = try JSONDecoder().decode([Planets].self, from: data)
-                complition(goPlanet)
+                let planets = try JSONDecoder().decode([Planets].self, from: data)
+                complition(planets)
             } catch let jsonError {
                 print(jsonError.localizedDescription)
             }
