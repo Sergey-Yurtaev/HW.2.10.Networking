@@ -22,6 +22,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLabels()
+        activityIndicator.color = .green
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         
@@ -36,10 +37,8 @@ class DetailsViewController: UIViewController {
         distanceLabel.text = "Distance to the Sun - \(planetDetail.distance ?? "No Info") million km"
         descriptionLabel.text = planetDetail.description ?? "No Info"
         
-        DispatchQueue.global().async { //убираем задержку при переходе. выводим в глобальный поток. (ассинхронно) сначала экран а потом загрузка картинок 
-            guard let stringURL = self.planetDetail.image else { return }
-            guard let imageURL = URL(string: stringURL) else { return }
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+        DispatchQueue.global().async { //убираем задержку при переходе. выводим в глобальный поток. (ассинхронно) сначала экран а потом загрузка картинок
+            guard let imageData = ImageManager.shared.fetchImage(from: self.planetDetail.image) else { return }
             
             DispatchQueue.main.async {  //обновляем интерфейс в основном потоке. (ассинхронно)
                 self.activityIndicator.stopAnimating()

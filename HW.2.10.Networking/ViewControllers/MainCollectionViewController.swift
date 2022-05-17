@@ -47,7 +47,7 @@ class MainCollectionViewController: UICollectionViewController {
 extension MainCollectionViewController {
     private func setNetworkData() {
         NetworkManager.shared.fetchData(from: urlPlanetInfo) { infoPlanets in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { //обновляем интерфейс в основном потоке. (ассинхронно)
                 self.planets = infoPlanets
                 self.collectionView.reloadData()
             }

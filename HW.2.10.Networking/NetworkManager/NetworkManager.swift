@@ -8,7 +8,6 @@
 import Foundation
 
 class NetworkManager {
-    
     static let shared = NetworkManager()
     
     private init() {}
@@ -30,6 +29,16 @@ class NetworkManager {
                 print(jsonError.localizedDescription)
             }
         }.resume()
+    }
+}
+
+class ImageManager {
+    static var shared = ImageManager()
+
+    func fetchImage(from url: String?) -> Data? {
+        guard let stringURL = url else { return nil }
+        guard let imageURL = URL(string: stringURL) else { return nil }
+        return try? Data(contentsOf: imageURL)
     }
 }
 
