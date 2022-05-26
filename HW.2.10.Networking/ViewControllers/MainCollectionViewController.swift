@@ -8,23 +8,22 @@
 import UIKit
 
 class MainCollectionViewController: UICollectionViewController {
-    
-    let urlPlanetInfo = "https://raw.githubusercontent.com/Lazzaro83/Solar-System/master/planets.json"
-    
+    //MARK: Private properties
+    private let urlPlanetInfo = "https://raw.githubusercontent.com/Lazzaro83/Solar-System/master/planets.json"
     private var planets: [Planets] = []
     
+    // MARK: - UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setNetworkData()
         collectionView.backgroundView = UIImageView(image: UIImage(named: "space.jpeg"))
-        
     }
-
+    
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return planets.count
     }
@@ -44,6 +43,15 @@ class MainCollectionViewController: UICollectionViewController {
     }
 }
 
+extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: UIScreen.main.bounds.width - 40, height: 80)
+    }
+}
+
+// MARK: - UISearchResultsUpdating
 extension MainCollectionViewController {
     private func setNetworkData() {
         NetworkManager.shared.fetchData(from: urlPlanetInfo) { infoPlanets in
@@ -55,12 +63,5 @@ extension MainCollectionViewController {
     }
 }
 
-extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: UIScreen.main.bounds.width - 40, height: 80)
-    }
-}
 
 

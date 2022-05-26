@@ -21,7 +21,7 @@ class NetworkManager {
                 return
             }
             guard let data = data else { return }
-            
+
             do {
                 let planets = try JSONDecoder().decode([Planets].self, from: data)
                 complition(planets)

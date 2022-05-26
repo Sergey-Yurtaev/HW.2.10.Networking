@@ -9,20 +9,27 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
+    // MARK: IBOutlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var namePlanetLabel: UILabel!
     @IBOutlet weak var velocityLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    //MARK: Public properties
     var planetDetail: Planets!
     
+    // MARK: - UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
         setupLabels()
-        activityIndicator.color = .green
+    }
+    
+    // MARK: - Private Methods
+    private func setupView() {
+        activityIndicator.color = .yellow
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         
