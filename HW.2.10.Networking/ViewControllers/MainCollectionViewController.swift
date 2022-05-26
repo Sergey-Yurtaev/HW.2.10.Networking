@@ -51,7 +51,6 @@ extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - UISearchResultsUpdating
 extension MainCollectionViewController {
     private func setNetworkData() {
         NetworkManager.shared.fetchData(from: urlPlanetInfo) { infoPlanets in
