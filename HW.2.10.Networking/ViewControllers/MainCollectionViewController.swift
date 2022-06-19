@@ -41,6 +41,10 @@ class MainCollectionViewController: UICollectionViewController {
         let detailsVC = segue.destination as! DetailsViewController
         detailsVC.planetDetail = planet
     }
+    
+    deinit {
+        print("MainCollectionViewController has been dealocated")
+    }
 }
 
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {

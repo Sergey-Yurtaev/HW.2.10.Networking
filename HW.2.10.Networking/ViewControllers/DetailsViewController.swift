@@ -53,5 +53,9 @@ class DetailsViewController: UIViewController {
             }
         }
     }
+    
+    deinit {
+        print("DetailsViewController has been dealocated")
+    }
 }
 
