@@ -15,6 +15,7 @@ class MainCollectionViewController: UICollectionViewController {
     // MARK: - UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setNetworkData()
         collectionView.backgroundView = UIImageView(image: UIImage(named: "space.jpeg"))
     }
@@ -40,6 +41,26 @@ class MainCollectionViewController: UICollectionViewController {
         let planet = planets[indexPath.row]
         let detailsVC = segue.destination as! DetailsViewController
         detailsVC.planetDetail = planet
+    }
+    
+    // MARK: - Private Methods
+    private func setupNavigationBar() {
+        let transparentColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        title = "Solar System"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // Navigation bar appearance
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.backgroundColor = transparentColor
+            
+            navBarAppearance.titleTextAttributes = [.foregroundColor: transparentColor]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
     }
     
     deinit {
